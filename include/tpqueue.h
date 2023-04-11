@@ -1,7 +1,7 @@
 // Copyright 2022 NNTU-CS
 #ifndef INCLUDE_TPQUEUE_H_
 #define INCLUDE_TPQUEUE_H_
-
+#include <string>
 template<typename T, int size>
 class TPQueue {
  private:
@@ -18,7 +18,7 @@ class TPQueue {
 };
 template <typename T, int size>
 bool TPQueue<T, size>::isEmpty() const {
-	return 0 == count;
+    return 0 == count;
 }
 template <typename T, int size>
 bool TPQueue<T, size>::isFull() const {
@@ -31,10 +31,12 @@ void TPQueue<T, size>::push(const T& value) {
     } else {
         ++count;
         arr[last % size] = value;
-        for (int last1 = last; last1 > first && arr[last1 % size].prior > arr[(last1-1) % size].prior; last1--) {
-            T temp = arr[last1 % size];
-            arr[last1 % size] = arr[(last1 - 1) % size];
-            arr[(last1 - 1) % size] = temp;
+        int l = last;
+        while (l > first && arr[l % size].prior > arr[(l - 1) % size].prior) {
+            T temp = arr[l % size];
+	    arr[l % size] = arr[(l - 1) % size];
+	    arr[(l - 1) % size] = temp;
+	    l--;
         }
         last++;
     }
