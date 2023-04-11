@@ -34,9 +34,9 @@ void TPQueue<T, size>::push(const T& value) {
         int l = last;
         while (l > first && arr[l % size].prior > arr[(l - 1) % size].prior) {
             T temp = arr[l % size];
-	    arr[l % size] = arr[(l - 1) % size];
-	    arr[(l - 1) % size] = temp;
-	    l--;
+            arr[l % size] = arr[(l - 1) % size];
+            arr[(l - 1) % size] = temp;
+            l--;
         }
         last++;
     }
